@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluent Loop Media | Language Learning Podcasts</title>
+    <meta name="description" content="Learn languages naturally through conversational podcasts. Spanish, English, French and more coming soon.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid #222;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #f59e0b;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #a1a1aa;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #f59e0b, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #a1a1aa;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #f59e0b, #ef4444);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #333;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            border-color: #f59e0b;
+        }
+
+        /* Languages Section */
+        .languages {
+            padding: 6rem 2rem;
+            background: #0f0f0f;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: #a1a1aa;
+            font-size: 1.1rem;
+        }
+
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .language-card {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid #222;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .language-card:hover {
+            border-color: #f59e0b;
+            transform: translateY(-5px);
+        }
+
+        .language-card.active {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a0a 100%);
+        }
+
+        .language-card.coming-soon {
+            opacity: 0.6;
+        }
+
+        .language-flag {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .language-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .language-card p {
+            color: #a1a1aa;
+            font-size: 0.95rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .badge-live {
+            background: #10b981;
+            color: #fff;
+        }
+
+        .badge-soon {
+            background: #333;
+            color: #a1a1aa;
+        }
+
+        /* Spanish Section */
+        .spanish-section {
+            padding: 6rem 2rem;
+            background: #0a0a0a;
+        }
+
+        .spanish-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .spanish-header h2 {
+            font-size: 2rem;
+        }
+
+        .episodes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .episode-card {
+            background: #1a1a1a;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #222;
+            transition: all 0.3s;
+        }
+
+        .episode-card:hover {
+            border-color: #333;
+            transform: translateY(-3px);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .episode-info {
+            padding: 1.5rem;
+        }
+
+        .episode-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .episode-info p {
+            color: #a1a1aa;
+            font-size: 0.9rem;
+        }
+
+        /* Subscribe Section */
+        .subscribe {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%);
+            text-align: center;
+        }
+
+        .subscribe h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .subscribe p {
+            color: #a1a1aa;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .subscribe-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .youtube-btn {
+            background: #ff0000;
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .youtube-btn:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            background: #0a0a0a;
+            border-top: 1px solid #222;
+            text-align: center;
+        }
+
+        footer p {
+            color: #666;
+        }
+
+        footer a {
+            color: #f59e0b;
+            text-decoration: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .episodes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">Fluent<span>Loop</span> Media</a>
+            <ul class="nav-links">
+                <li><a href="#languages">Languages</a></li>
+                <li><a href="#spanish">Spanish</a></li>
+                <li><a href="#subscribe">Subscribe</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Learn Languages <span>Naturally</span></h1>
+            <p>Immerse yourself in natural conversations. Our podcast-style lessons help you learn languages through real dialogue, perfect for passive listening while you work, commute, or relax.</p>
+            <div class="hero-buttons">
+                <a href="#spanish" class="btn btn-primary">Start Learning Spanish</a>
+                <a href="#languages" class="btn btn-secondary">View All Languages</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Languages Section -->
+    <section class="languages" id="languages">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Choose Your Language</h2>
+                <p>Natural conversation practice in multiple languages</p>
+            </div>
+            <div class="language-grid">
+                <a href="#spanish" class="language-card active">
+                    <div class="language-flag">🇪🇸</div>
+                    <h3>Spanish Listening Practice Podcast</h3>
+                    <p>Learn Spanish through everyday conversations about daily routines, travel, food, and more.</p>
+                    <span class="badge badge-live">Live Now</span>
+                </a>
+                <div class="language-card coming-soon">
+                    <div class="language-flag">🇺🇸</div>
+                    <h3>English Listening Practice Podcast</h3>
+                    <p>Perfect for ESL learners. Natural American English conversations for all levels.</p>
+                    <span class="badge badge-soon">Coming Soon</span>
+                </div>
+                <div class="language-card coming-soon">
+                    <div class="language-flag">🇫🇷</div>
+                    <h3>French Listening Practice Podcast</h3>
+                    <p>Master French through authentic Parisian conversations and everyday scenarios.</p>
+                    <span class="badge badge-soon">Coming Soon</span>
+                </div>
+                <div class="language-card coming-soon">
+                    <div class="language-flag">🇧🇷</div>
+                    <h3>Portuguese Listening Practice Podcast</h3>
+                    <p>Brazilian Portuguese conversations for beginners to intermediate learners.</p>
+                    <span class="badge badge-soon">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spanish Section -->
+    <section class="spanish-section" id="spanish">
+        <div class="section-container">
+            <div class="spanish-header">
+                <span style="font-size: 2.5rem;">🇪🇸</span>
+                <h2>Spanish Listening Practice Podcast</h2>
+            </div>
+            <div class="episodes-grid">
+                <!-- Episode 1 -->
+                <div class="episode-card">
+                    <div class="video-container">
+                        <iframe
+                            src="https://www.youtube-nocookie.com/embed/3RpmqiSV7FQ?rel=0"
+                            title="Spanish Listening Practice - Daily Routines"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="episode-info">
+                        <h3>Episode 1: Daily Routines (Rutinas Diarias)</h3>
+                        <p>Learn everyday vocabulary about morning routines, work, meals, and evening activities.</p>
+                    </div>
+                </div>
+
+                <!-- Placeholder for Episode 2 -->
+                <div class="episode-card" style="opacity: 0.5; border-style: dashed;">
+                    <div class="video-container" style="background: #1a1a1a; display: flex; align-items: center; justify-content: center;">
+                        <div style="position: absolute; text-align: center; padding: 2rem;">
+                            <p style="font-size: 3rem; margin-bottom: 1rem;">🎙️</p>
+                            <p style="color: #666;">Episode 2 Coming Soon</p>
+                        </div>
+                    </div>
+                    <div class="episode-info">
+                        <h3>Episode 2: Coming Soon</h3>
+                        <p>New episodes released weekly. Subscribe to get notified!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscribe Section -->
+    <section class="subscribe" id="subscribe">
+        <div class="section-container">
+            <h2>Never Miss an Episode</h2>
+            <p>Subscribe to our YouTube channel and turn on notifications to get new episodes every week. Perfect for learning while you sleep, work, or commute.</p>
+            <div class="subscribe-buttons">
+                <a href="https://www.youtube.com/@FluentLoopSpanish" class="youtube-btn" target="_blank">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                    Subscribe on YouTube
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Fluent Loop Media. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">Learn languages naturally through conversation.</p>
+    </footer>
+</body>
+</html>
